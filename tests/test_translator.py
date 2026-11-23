@@ -39,9 +39,10 @@ class TranslatorTests(unittest.TestCase):
 
     def test_nested_constant_values(self):
         """Массив и вычисленное значение доступны в следующих выражениях."""
-        source = "const a = #(1., #(2.)) const b = $2 3 pow$ #($a$, $b$)"
+        source = "const a = #(1., #(2.)) const b = $2 3 pow()$ #($a$, $b$)"
         self.assertEqual(translate(source), [[1.0, [2.0]], 8.0])
         self.assertEqual(translate("const a = 2."), [])
+        self.assertEqual(translate("const pow = 7. $pow$"), 7.0)
 
     def test_expression_errors(self):
         """Не хватает операндов, лишнее значение, имена и неверный тип."""

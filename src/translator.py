@@ -12,7 +12,7 @@ PARSER = Lark(GRAMMAR.read_text(encoding="utf-8"), parser="lalr",
 SINGLE_VALUE = 1
 OPERAND_COUNT = 2
 OPERATIONS = {"+": operator.add, "-": operator.sub, "*": operator.mul,
-              "pow": math.pow, "pow()": math.pow}
+              "pow()": math.pow}
 DECLARATION = object()
 
 

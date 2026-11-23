@@ -1,7 +1,18 @@
-start: value*
+start: (constant | value)*
+constant: "const" NAME "=" value
 ?value: DECIMAL -> number
       | array
+      | expression
 array: "#(" [value ("," value)*] ")"
+expression: "$" item+ "$"
+?item: DECIMAL -> number
+     | INTEGER -> number
+     | NAME -> reference
+     | array
+     | OP
+OP.2: /pow(?:\(\))?(?![a-z])/ | "+" | "-" | "*"
+NAME: /[a-z]+/
+INTEGER: /[0-9]+/
 DECIMAL: /[0-9]+\.[0-9]*/
 %ignore /;[^\r\n]*/
 %ignore /\{[^}]*\}/
